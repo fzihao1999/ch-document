@@ -1,0 +1,49 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{palatino}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{amsthm,amsmath,amssymb}
+\usepackage{mathrsfs}
+\pagestyle{plain} %设置页眉页脚
+\lstset{
+    numbers=left, 
+    numberstyle= \tiny, 
+    keywordstyle= \color{ blue!70},
+    commentstyle= \color{red!50!green!50!blue!50}, 
+    frame=shadowbox, % 阴影效果
+    rulesepcolor= \color{ red!20!green!20!blue!20} ,
+    escapeinside=``, % 英文分号中可写入中文
+    xleftmargin=2em,xrightmargin=2em, aboveskip=1em,
+    framexleftmargin=2em
+} 
+\usetikzlibrary{shapes.geometric, arrows}
+\geometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+\numberwithin{equation}{section}
+\begin{document}
+
+\section{Problem Definition}
+We are given a set of strings that represents the Chinese document written by the gradute students. We formally define the set of documents as $D$. For each document $d\in D$, we use a k-dimensional word vetor $x_{d}=<x_{d1},...,x_{dK}>(\forall_{k,x_{dk}} \in \mathbb{R})$, where $x_{dk}$ indicates the $k$-th feature of document. More specifically, the feature can be abstract like Word Enbedding, or interpretable like Bag of Words model.
+
+For each $d\in D$, we are given a number $s_{d}$ and a set of string $e_{d}$, which represents the score and the evaluation of document $d$.
+
+\noindent \textbf{Definition 1 \emph{Document evaluation function}} Given the set of documents $D$, and score $S$, our goal is to learn a function $f_{d}$, which can caculate the score of a given document:
+\begin{equation}
+f_{d}(D) \rightarrow  S
+\end{equation}
+
+\noindent \textbf{Definition 2 \emph{Document evaluation classification function}} Given the set of documents $D$, and evaluation $E$, our goal is to learn a function $f_{e}$, which can caculate the score of a given document on several categories. 
+
+We divide the evaluation into $<T,N,A,I>$, which indicates the topic, norm, achievement and innovation. We train a divide function $f_{divE}$, which can express the evaluation with a 4-dimensional feature vector $e_{i}=<e_{iT},e_{iN},e_{iA},e_{iI}>$.
+
+We use the set of documents $D$, and the evaluation vector $E$ to learn a function $f_{e}$, which can caculate the value on the four feature.
+
+\noindent \textbf{Definition 3 \emph{Sentence evaluation function}} In this part, we want to make the score more fine-grained. Since we don't have the score of every sentence in document. We can extract the first sentence of each paragraph and the total abstract, which has a good represention of the document. We give these sentences in $d_{i}$ the score $f_{score}(sen_{ij})$, where $sen_{ij}$ indicates the $j$-th sentence in $d_{i}$ and $f_{score}$ indicates a sentence score function base on the given score $s_{i}$ of $d_{i}$ (e.g., the abstract have a higher weight of the represention of a document, so its value is closer to $s_{i}$).
+
+We ues the set of sentence $Sen$, and the score of sentences $S_{sen}$ to learn a function $f_{sen}$, which can caculate the score of a sentence.
+
+
+\end{document}
